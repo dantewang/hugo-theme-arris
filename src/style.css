@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .clip-home-picture {
+        clip-path: polygon(100% 0, 100% calc(100% - 28px), calc(100% - 48px) 100%, 0 100%, 0 0);
+    }
+
+    .clip-home-details {
+        clip-path: polygon(calc(100% - 24px) 0%, 100% calc(100% - calc(100% - 20px)), 100% 100%, 0 100%, 0 0);
+    }
+
+    .clip-home-sidebar {
+        clip-path: polygon(0 0, 100% 0%, 100% calc(100% - 20px), 0% 100%);
+    }
+
+    .clip-single-back {
+        clip-path: polygon(25% 0, 100% 0, 100% 100%, 25% 100%, 0 50%);
+    }
+}
+
+/* Styling Hugo internal navigation */
+.pagination {
+    @apply flex flex-row justify-center;
+}
+
+.pagination .page-item {
+    @apply p-2 text-teal-600 hover:text-teal-500;
+}
+
+.pagination .disabled {
+    @apply text-slate-400 hover:text-slate-400;
+}

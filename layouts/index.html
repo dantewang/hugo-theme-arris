@@ -1,0 +1,66 @@
+{{ define "main" -}}
+
+<aside class="flex-none w-36 h-fit mr-4 overflow-visible">
+    <!--<div class="absolute ml-4 mb-[10px] bg-slate-500 w-56 h-64 z-0"></div>-->
+    <!-- relative top-0 left-0 mr-8 mt-4 -->
+    <img class="transition-transform delay-150 hover:rotate-12" src="/D.png" />
+    <div class="drop-shadow">
+        <div class="pb-[20px] clip-home-sidebar bg-white">
+            <ul class="grid grid-cols-1 divide-y">
+                {{ $currentPage := . }}
+                {{ range .Site.Menus.main }}
+                    <li class="p-4 text-center">
+                        <a href="{{ .URL }}">
+                            {{ .Pre }}
+                            <span>{{ .Name }}</span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</aside>
+
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
+
+<main class="flex-1">
+    {{ range $paginator.Pages }}
+        <article class="drop-shadow">
+            {{ $imageValue := index .Params "image" }}
+            {{ if $imageValue }}
+            <div id="article-image" class="clip-home-picture bg-white h-96">
+                <img class="object-cover object-center w-full h-full" src="{{ .Permalink }}/{{ .Params.image }}" />
+            </div>
+            {{ end }}
+            <div class="p-8 mb-3 mr-6 clip-home-details bg-white">
+                <h1 class="text-2xl pb-1">
+                    <a class="text-teal-600 hover:text-teal-500" href="{{ .Permalink }}">{{ .Title }}</a>
+                </h1>
+                {{ with .Params.description }}
+                <p class="text-lg text-gray-600 pb-1">
+                    {{ . }}
+                </p>
+                {{ end }}
+                <p class="text-gray-400 text-sm">
+                    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}">{{ .Date.Format "2006-01-02" }}</time>
+                    {{ with .Params.categories }}
+                    <span class="pl-1">
+                        {{ . }}
+                    </span>
+                    {{ end }}
+                    {{ with .Params.tags }}
+                    <span class="pl-1">
+                        {{ . }}
+                    </span>
+                    {{ end }}
+                </p>
+            </div>
+        </article>
+    {{- end }}
+
+    <div class="mr-6 drop-shadow bg-white">
+        {{ template "_internal/pagination.html" . }}
+    </div>
+</main>
+
+{{- end }}

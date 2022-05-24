@@ -1,0 +1,17 @@
+{{ define "main" -}}
+<aside class="drop-shadow flex-none">
+    <div id="side-back" class="clip-single-back bg-white h-fit pl-12 pr-8 py-4">
+        <a class="text-2xl" href="{{ .Site.Home.Permalink }}">返回</a>
+    </div>
+</aside>
+
+<article class="drop-shadow flex-1">
+    <div class="p-8 ml-2 clip-home-details bg-white prose max-w-none prose-a:text-teal-600 hover:prose-a:text-teal-500">
+        <h1>{{ .Title }}</h1>
+        {{ if .Date }}
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}" >{{ .Date.Format "2006-01-02" }}</time>
+        {{ end }}
+        {{ .Content }}
+    </div>
+</article>
+{{- end }}
